@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+
+    <link rel="stylesheet" href="/static/styles.css">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Area', 'Deforestration', 'Wild Fire', 'Intruders'],
+          ['1', 2, 1, 5],
+          ['2', 4, 3, 6],
+          ['3', 4, 3, 1],
+          ['4', 6, 5, 2],
+          ['5', 2, 5, 1]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Deforestration, Wild Fire and Intruder Analysis 2023',
+          },
+          bars: 'vertical', // Required for Material Bar Charts.
+          chartArea: {
+        backgroundColor: 'lightgray' // Set the background color to 'lightgray'
+    }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            FOREST DASHBOARD
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">inventory_2</span> Contact Us
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h1>WELCOME TO SPY FOREST ...</h1>
+        </div>
+
+        <div class="main-cards">
+
+          <div class="card">
+            <a href="http://127.0.0.1:5503/index.html" target="_blank" class="card-link">
+                <div class="card-inner">
+                    <h3>Trespassing</h3>
+                </div>
+            </a>
+	    <h1 id="Illegal activities">Loading...</h1>
+	    <script>
+            fetch('/static/alert.json')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                const alertValueElement = document.getElementById('alertValue');
+                alertValueElement.textContent = data.saw;
+            })
+            .catch(error => console.log(error));
+            </script>
+          </div>
+
+
+          <div class="card">
+            <a href="http://127.0.0.1:5501/index.html" target="_blank" class="card-link">
+            <div class="card-inner">
+              <h3>Illegal activities</h3>
+              <span class="material-icons-outlined">notification_important</span>
+            </div>
+          </a>
+            <h1 id="Illegal activities">Loading...</h1>
+            <script>
+            fetch('/static/alert.json')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                const alertValueElement = document.getElementById('alertValue');
+                alertValueElement.textContent = data.tresspassing;
+            })
+            .catch(error => console.log(error));
+            </script>
+          </div>
+
+        </div>
+
+        
+      </main>
+      <!-- End Main -->
+
+    </div>
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/static/scripts.js"></script>
+  </body>
+</html>
